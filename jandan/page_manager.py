@@ -69,10 +69,10 @@ class PageManager:
                 self.write_comment_to_db(hot_comment)
 
     def write_post_to_db(self, post):
-        sql = "INSERT INTO Post(Post_id, Post_time, Post_user, Post_oo, Post_xx, Post_comment_count, Post_text) " \
+        sql = "INSERT INTO post(post_id, post_time, post_user, post_oo, post_xx, post_comment_count, post_text) " \
               "VALUES (%(post_id)s, %(post_time)s, %(post_user)s, %(post_oo)s, %(post_xx)s, %(post_comment_count)s, %(post_text)s) " \
               "ON DUPLICATE KEY " \
-              "UPDATE Post_oo = %(post_oo)s, Post_xx = %(post_xx)s, Post_comment_count = %(post_comment_count)s, Post_text = %(post_text)s"
+              "UPDATE post_oo = %(post_oo)s, post_xx = %(post_xx)s, post_comment_count = %(post_comment_count)s, post_text = %(post_text)s"
         val = {'post_id': post.post_id,
                'post_time': post.post_time,
                'post_user': post.post_user,
@@ -84,10 +84,10 @@ class PageManager:
         self.my_db.commit()
 
     def write_comment_to_db(self, comment):
-        sql = "INSERT INTO Comment(Comment_id, Comment_user, Comment_oo, Comment_xx, Is_hot_comment, Comment_text, Post_id) " \
+        sql = "INSERT INTO comment(comment_id, comment_user, comment_oo, comment_xx, Is_hot_comment, comment_text, post_id) " \
               "VALUES (%(comment_id)s, %(comment_user)s, %(comment_oo)s, %(comment_xx)s, %(is_hot_comment)s, %(comment_text)s, %(post_id)s) " \
               "ON DUPLICATE KEY " \
-              "UPDATE Comment_oo = %(comment_oo)s, Comment_xx = %(comment_xx)s, Is_hot_comment = %(is_hot_comment)s"
+              "UPDATE comment_oo = %(comment_oo)s, comment_xx = %(comment_xx)s, Is_hot_comment = %(is_hot_comment)s"
         val = {'comment_id': comment.comment_id,
                'comment_user': comment.comment_user,
                'comment_oo': comment.comment_oo,
