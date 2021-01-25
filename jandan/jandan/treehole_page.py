@@ -15,12 +15,16 @@ class TreeholePage:
     __bad_content_locator = (By.XPATH, '//a[@class="view_bad"]')
 
     def __init__(self, driver, parse=True):
+        driver.get('http://i.jandan.net/treehole')
         self.url = driver.current_url
         self.current_page_number = int(retain_number(wait_for_element_present(
             driver, self.__current_page_locator).text))
+
         if parse:
             self.open_bad_content(driver)
             self.post_list = self.parse_post_list(driver)
+            print(driver.page_source)
+
 
     def parse_post_list(self, driver):
         print("Parsing post list...")
@@ -87,10 +91,14 @@ class TreeholePage:
             print("Parsing post...")
             post_user = wait_for_element_present(post_element, self.__user_locator).text
             post_time = wait_for_element_present(post_element, self.__time_locator).text.strip()[2:]
-            post_text = wait_for_element_present(post_element, self.__text_locator).text
             post_id = wait_for_element_present(post_element, self.__id_locator).text
             post_oo = wait_for_element_present(post_element, self.__oo_locator).text
             post_xx = wait_for_element_present(post_element, self.__xx_locator).text
+
+            post_text = ''
+            post_text_elements = wait_for_elements_present(post_element, self.__text_locator)
+            for post_text_element in post_text_elements:
+                post_text += '\n' + post_text_element.text
 
             comment_list = []
             hot_comment_list = []
@@ -161,7 +169,11 @@ class TreeholePage:
             def parse_comment(self, comment_element):
                 comment_user = wait_for_element_present(comment_element, self.__user_locator).text
                 comment_id = wait_for_element_present(comment_element, self.__id_locator).text[1:]
-                comment_text = wait_for_element_present(comment_element, self.__text_locator).text
+                comment_text = ''
+                comment_text_elements = wait_for_elements_present(comment_element, self.__text_locator)
+                for comment_text_element in comment_text_elements:
+                    comment_text += '\n' + comment_text_element.text
+
                 comment_oo = wait_for_element_present(comment_element, self.__oo_locator).text
                 comment_xx = wait_for_element_present(comment_element, self.__xx_locator).text
                 return comment_user, comment_id, comment_oo, comment_xx, comment_text

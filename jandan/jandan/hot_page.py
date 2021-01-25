@@ -75,10 +75,14 @@ class HotPage:
             print("Parsing post...")
             post_user = wait_for_element_present(post_element, self.__user_locator).text
             post_time = wait_for_element_present(post_element, self.__time_locator).text.strip()[2:]
-            post_text = wait_for_element_present(post_element, self.__text_locator).text
             post_id = post_element.get_attribute('id')[8:]
             post_oo = wait_for_element_present(post_element, self.__oo_locator).text
             post_xx = wait_for_element_present(post_element, self.__xx_locator).text
+
+            post_text = ''
+            post_text_elements = wait_for_elements_present(post_element, self.__text_locator)
+            for post_text_element in post_text_elements:
+                post_text += '\n' + post_text_element.text
 
             post_img_link_list = []
             try:
@@ -158,7 +162,11 @@ class HotPage:
             def parse_comment(self, comment_element):
                 comment_user = wait_for_element_present(comment_element, self.__user_locator).text
                 comment_id = wait_for_element_present(comment_element, self.__id_locator).text[1:]
-                comment_text = wait_for_element_present(comment_element, self.__text_locator).text
+                comment_text = ''
+                comment_text_elements = wait_for_elements_present(comment_element, self.__text_locator)
+                for comment_text_element in comment_text_elements:
+                    comment_text += '\n' + comment_text_element.text
+
                 comment_oo = wait_for_element_present(comment_element, self.__oo_locator).text
                 comment_xx = wait_for_element_present(comment_element, self.__xx_locator).text
                 return comment_user, comment_id, comment_oo, comment_xx, comment_text

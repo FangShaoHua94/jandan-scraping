@@ -84,7 +84,7 @@ class HotPageManager:
         sql = "INSERT INTO HotComment(comment_id, comment_user, comment_oo, comment_xx, Is_hot_comment, comment_text, post_id) " \
               "VALUES (%(comment_id)s, %(comment_user)s, %(comment_oo)s, %(comment_xx)s, %(is_hot_comment)s, %(comment_text)s,  %(post_id)s)" \
               "ON DUPLICATE KEY " \
-              "UPDATE comment_oo = %(comment_oo)s, comment_xx = %(comment_xx)s, Is_hot_comment = %(is_hot_comment)s"
+              "UPDATE comment_oo = %(comment_oo)s, comment_xx = %(comment_xx)s, is_hot_comment = %(is_hot_comment)s, comment_text = %(comment_text)s"
         val = {'comment_id': comment.comment_id,
                'comment_user': comment.comment_user,
                'comment_oo': comment.comment_oo,

@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 def setup_driver(browser, driver_path):
     options = Options()
     options.add_argument("--start-maximized")
-    # options.add_argument("--user-data-dir=C:/Users/shaohua/AppData/Local/Google/Chrome/User Data/Profile 1")
+    options.add_argument("--headless")
 
     if browser == 'chrome':
         driver = webdriver.Chrome(driver_path, options=options)

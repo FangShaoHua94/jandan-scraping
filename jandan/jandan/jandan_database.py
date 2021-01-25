@@ -1,6 +1,10 @@
 import mysql.connector
+from pymongo import MongoClient
+
 import os
+
 from dotenv import load_dotenv
+
 
 class MyDB:
 
@@ -55,3 +59,5 @@ class MyDB:
 #                   "Comment_text TEXT NOT NULL, "
 #                   "Post_id INT NOT NULL, "
 #                   "FOREIGN KEY (Post_id) REFERENCES Post(Post_id))")
+
+
